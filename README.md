@@ -59,7 +59,7 @@ We're going to add support for Open Telemetry API's(one of the many ways to do d
           io.grpc:grpc-okhttp:1.26.0) \
        standalone
 ```
-Refer [start-grid.sh](/start-grid.sh) if you want to start Grid in distributed mode.
+Refer [start-grid-distributed.sh](/start-grid-distributed.sh) if you want to start Grid in distributed mode.
 
 ```curl http://locahost:4444/status``` to check if your grid deployment is ready
 
