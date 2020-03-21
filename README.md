@@ -54,6 +54,8 @@ We're going to add support for Open Telemetry API's(one of the many ways to do d
           io.grpc:grpc-okhttp:1.26.0) \
        standalone
 ```
+Refer [start-grid.sh](/start-grid.sh) if you want to start Grid in distributed mode.
+
 ```curl http://locahost:4444/status``` to check if your grid deployment is ready
 
 ![Grid status](/images/grid-ready.png)
@@ -66,7 +68,8 @@ Under services look up for Selenium-router and notices actions for each calls ma
 ![Traces](/images/route-traces.png)
 
 References:
-* [Tracing Info command](https://github.com/SeleniumHQ/selenium/blob/master/java/server/src/org/openqa/selenium/grid/commands/tracing.txt)
+* [Tracing Info command](https://github.com/SeleniumHQ/selenium/)
 * [Jaeger guide](https://www.jaegertracing.io/docs/1.17/getting-started/)
+* [Three Pillars of Observability](https://learning.oreilly.com/library/view/distributed-systems-observability/9781492033431/ch04.html)
 
-A special thanks to [Simon Stewart](https://github.com/shs96c) for being patience in answering my dumb questions.
+A special thanks to ever helpful [Simon Stewart](https://github.com/shs96c) for being patience in answering my dumb questions.
