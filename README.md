@@ -34,6 +34,7 @@ Steps to start tracing your tests,
 Assuming you have docker running on your machine,
 1. Install Coursier via homebrew `brew install coursier/formulas/coursier`
 2. Install [Jaeger](https://www.jaegertracing.io/download/) via docker
+3. Selenium-server.jar refers to the latest alpha version of selenium releases (Tested with Apha 5)
 
 ## Start Jaeger via docker server
 The simplest way to start the all-in-one is to use the pre-built image published to DockerHub (a single command line).
