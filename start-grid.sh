@@ -18,7 +18,7 @@ java -DJAEGER_SERVICE_NAME="selenium-distributor" \
      --ext $(coursier fetch -p \
         io.opentelemetry:opentelemetry-exporters-jaeger:0.2.0 \
         io.grpc:grpc-okhttp:1.26.0) \
-     distributor -s http://localhost:5556 &
+     distributor --sessions http://localhost:5556 &
 
 sleep 2
 
@@ -29,7 +29,7 @@ java -DJAEGER_SERVICE_NAME="selenium-router" \
      --ext $(coursier fetch -p \
         io.opentelemetry:opentelemetry-exporters-jaeger:0.2.0 \
         io.grpc:grpc-okhttp:1.26.0) \
-     router -s http://localhost:5556 -d http://localhost:5553 &
+     router --sessions http://localhost:5556 --distributor http://localhost:5553 &
 
 sleep 2
 
