@@ -30,6 +30,11 @@ Steps to start tracing your tests,
 
 * Now execute your tests tests, and navigate to `http://localhost:16686/` to view the outputs.
 
+## Pre-requisites
+Assuming you have docker running on your machine,
+1. Install Coursier via homebrew `brew install coursier/formulas/coursier`
+2. Install [Jaeger](https://www.jaegertracing.io/download/) via docker
+
 ## Start Jaeger via docker server
 The simplest way to start the all-in-one is to use the pre-built image published to DockerHub (a single command line).
 
