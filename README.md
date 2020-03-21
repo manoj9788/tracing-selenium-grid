@@ -26,7 +26,7 @@ Steps to start tracing your tests,
 
 * Start Jaeger via docker(as its easy)
 
-* Instrument your Selenium Grid start-up command with Jaeger tracing as in start-grid.sh and start-grid-standalone.sh for standalone mode.
+* Instrument your Selenium Grid start-up command with Jaeger tracing as in [start-grid.sh](/start-grid.sh) and [start-grid-standalone.sh](/start-grid-standalone.sh) for standalone mode.
 
 * Now execute your tests tests, and navigate to `http://localhost:16686/` to view the outputs.
 
@@ -42,10 +42,8 @@ $ docker run --rm -it --name jaeger \
   You can then navigate to http://localhost:16686 to access the Jaeger UI.
 
 ## Instrument your Selenium Grid
-We're going to add support for Open Telemetry API's(one of the many ways to do distributed tracing) using Coursier
+We're going to add support for Open Telemetry API's(one of the many ways to do distributed tracing) using [Coursier](https://get-coursier.io/docs/overview) to generate a full classpath, when started this way the selenium server will inform you that it has found a tracer on stdout.
 
-The selenium server will inform you that it has found a tracer on
-stdout.
 ```
   java -DJAEGER_SERVICE_NAME="selenium-standalone" \
        -DJAEGER_AGENT_HOST=localhost \
@@ -71,4 +69,4 @@ References:
 * [Tracing Info command](https://github.com/SeleniumHQ/selenium/blob/master/java/server/src/org/openqa/selenium/grid/commands/tracing.txt)
 * [Jaeger guide](https://www.jaegertracing.io/docs/1.17/getting-started/)
 
-A special thanks to @shs96c Simon Stewart for being patience in answering my dumb questions.
+A special thanks to [Simon Stewart](https://github.com/shs96c) for being patience in answering my dumb questions.
