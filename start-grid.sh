@@ -1,8 +1,5 @@
 #!/bin/bash -x
 
-#using selenium-server-4.0.0-alpha-5.jar
-ps auxw | grep selenium-server.jar | awk '{print $2}' | xargs kill
-
 java -DJAEGER_SERVICE_NAME="selenium-session-map" \
      -DJAEGER_AGENT_HOST=localhost \
      -DJAEGER_AGENT_PORT=14250 \
