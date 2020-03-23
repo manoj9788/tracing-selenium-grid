@@ -50,19 +50,9 @@ $ docker run --rm -it --name jaeger \
 ## Instrument your Selenium Grid command
 We're going to add support for Open Telemetry API's(one of the many ways to do distributed tracing) using [Coursier](https://get-coursier.io/docs/overview) to generate a full classpath, when started this way the selenium server will inform you that it has found a tracer on stdout.
 
-```
-  java -DJAEGER_SERVICE_NAME="selenium-standalone" \
-       -DJAEGER_AGENT_HOST=localhost \
-       -DJAEGER_AGENT_PORT=14250 \
-       -jar selenium.jar \
-       --ext $(coursier fetch -p \
-          io.opentelemetry:opentelemetry-exporters-jaeger:0.2.4 \
-          io.grpc:grpc-okhttp:1.26.0) \
-       standalone
-```
 Refer [start-grid-distributed.sh](/start-grid-distributed.sh) if you want to start Grid in distributed mode.
 
-```curl http://locahost:4444/status``` to check if your grid deployment is ready
+```curl http://localhost:4444/status``` to check if your grid deployment is ready
 
 ![Grid status](/images/grid-ready.png)
 
