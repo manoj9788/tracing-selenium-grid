@@ -1,6 +1,6 @@
 #!/bin/bash -x
 
-ps auxw | grep selenium-server-4.0.0-alpha-7.jar | awk '{print $2}' | xargs kill
+ps auxw | grep selenium-server-4.0.0-alpha-6.jar | awk '{print $2}' | xargs kill
  
 java -DJAEGER_SERVICE_NAME="selenium-standalone" \
     -DJAEGER_AGENT_HOST=localhost \
