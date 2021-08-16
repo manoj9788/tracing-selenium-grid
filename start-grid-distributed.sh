@@ -1,7 +1,7 @@
 #!/bin/bash -x
 java -Dotel.traces.exporter=jaeger \
      -Dotel.exporter.jaeger.endpoint=localhost:14250 \
-     -Dotel.resource.attributes=service.name=selenium-standalone \
+     -Dotel.resource.attributes=service.name=selenium-event-bus \
      -jar selenium-beta-4.jar \
      --ext $(coursier fetch -p \
         io.opentelemetry:opentelemetry-exporter-jaeger:1.0.0 \
@@ -10,7 +10,7 @@ java -Dotel.traces.exporter=jaeger \
 sleep 2
 java -Dotel.traces.exporter=jaeger \
      -Dotel.exporter.jaeger.endpoint=localhost:14250 \
-     -Dotel.resource.attributes=service.name=selenium-standalone \
+     -Dotel.resource.attributes=service.name=selenium-sessions \
      -jar selenium-beta-4.jar \
      --ext $(coursier fetch -p \
         io.opentelemetry:opentelemetry-exporter-jaeger:1.0.0 \
@@ -19,16 +19,16 @@ java -Dotel.traces.exporter=jaeger \
 sleep 2
 java -Dotel.traces.exporter=jaeger \
      -Dotel.exporter.jaeger.endpoint=localhost:14250 \
-     -Dotel.resource.attributes=service.name=selenium-standalone \
+     -Dotel.resource.attributes=service.name=selenium-session-queue \
      -jar selenium-beta-4.jar \
      --ext $(coursier fetch -p \
         io.opentelemetry:opentelemetry-exporter-jaeger:1.0.0 \
         io.grpc:grpc-netty:1.35.0) \
-     sessionqueuer &
+     sessionqueue &
 sleep 2
 java -Dotel.traces.exporter=jaeger \
      -Dotel.exporter.jaeger.endpoint=localhost:14250 \
-     -Dotel.resource.attributes=service.name=selenium-standalone \
+     -Dotel.resource.attributes=service.name=selenium-distributor \
      -jar selenium-beta-4.jar \
      --ext $(coursier fetch -p \
         io.opentelemetry:opentelemetry-exporter-jaeger:1.0.0 \
@@ -37,7 +37,7 @@ java -Dotel.traces.exporter=jaeger \
 sleep 2
 java -Dotel.traces.exporter=jaeger \
      -Dotel.exporter.jaeger.endpoint=localhost:14250 \
-     -Dotel.resource.attributes=service.name=selenium-standalone \
+     -Dotel.resource.attributes=service.name=selenium-router \
      -jar selenium-beta-4.jar \
      --ext $(coursier fetch -p \
         io.opentelemetry:opentelemetry-exporter-jaeger:1.0.0 \
@@ -46,7 +46,7 @@ java -Dotel.traces.exporter=jaeger \
 sleep 2
 java -Dotel.traces.exporter=jaeger \
      -Dotel.exporter.jaeger.endpoint=localhost:14250 \
-     -Dotel.resource.attributes=service.name=selenium-standalone \
+     -Dotel.resource.attributes=service.name=selenium-node \
      -jar selenium-beta-4.jar \
      --ext $(coursier fetch -p \
         io.opentelemetry:opentelemetry-exporter-jaeger:1.0.0 \
