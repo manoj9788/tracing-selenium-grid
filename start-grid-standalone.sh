@@ -2,11 +2,11 @@
 
 ps auxw | grep selenium-server-4.0.0-alpha-7.jar | awk '{print $2}' | xargs kill
  
-java -DJAEGER_SERVICE_NAME="selenium-standalone" \
-    -DJAEGER_AGENT_HOST=localhost \
-    -DJAEGER_AGENT_PORT=14250 \
-    -jar selenium-server-4.0.0-alpha-7.jar \
-    --ext $(coursier fetch -p \
-        io.opentelemetry:opentelemetry-exporters-jaeger:0.9.1 \
-        io.grpc:grpc-netty:1.32.1) \
+java -Dotel.traces.exporter=jaeger \
+     -Dotel.exporter.jaeger.endpoint=localhost:14250 \
+     -Dotel.resource.attributes=service.name=selenium-standalone \
+     -jar selenium-beta-4.jar \
+     --ext $(coursier fetch -p \
+        io.opentelemetry:opentelemetry-exporter-jaeger:1.0.0 \
+        io.grpc:grpc-netty:1.35.0) \
     standalone
