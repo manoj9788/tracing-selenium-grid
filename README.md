@@ -5,9 +5,9 @@ TL;DR: A simple project to showcase Selenium 4's Tracing capability using OpenTe
 ## Observability 
 > *It is a measure of how well internal states of a system can be inferred from knowledge of its external outputs. It helps bring visibility into systems.* – Wikipedia 
 
-Tracing is one of the important pillars for measuring observability along with logs and metrics. Its a way of thinking about the system, a way of being able to ask the system questions, that you need the answer to when you didn't know the questions beforehand. On the other hand, alerting is a way of asking questions when you do know the question beforehand.
+Tracing is one of the important pillars for measuring observability along with logs and metrics. It's a way of thinking about the system, a way of being able to ask the system questions, that you need the answer to when you didn't know the questions beforehand. On the other hand, alerting is a way of asking questions when you do know the question beforehand.
 
-Distributed Tracing can be quite helpful in answering questions for your distibuted system like,
+Distributed Tracing can be quite helpful in answering questions for your distributed system like,
 
 * Root cause analysis
 * Performance optimisation
@@ -31,10 +31,12 @@ Steps to start tracing your tests,
 * Now execute your tests tests, and navigate to `http://localhost:16686/` to view the outputs.
 
 ## Pre-requisites
-Assuming you have docker running on your machine,
-1. Install Coursier via homebrew `brew install coursier/formulas/coursier`
-2. Install [Jaeger](https://www.jaegertracing.io/download/) via docker
-3. Selenium-server.jar refers to the latest alpha version of selenium releases (Tested with Apha 5)
+Assuming you have java and docker running on your machine,
+1. Install [Jaeger](https://www.jaegertracing.io/download/) via docker
+2. Selenium-server.jar refers to the latest alpha version of selenium releases (Tested with Alpha 5)
+   - Download from here: https://github.com/SeleniumHQ/selenium/releases/latest
+   - Put jar in the repo root directory
+   - Rename to `selenium-server.jar`
 
 ## Start Jaeger via docker server
 The simplest way to start the all-in-one is to use the pre-built image published to DockerHub (a single command line).
@@ -48,7 +50,8 @@ $ docker run --rm -it --name jaeger \
   You can then navigate to http://localhost:16686 to access the Jaeger UI.
 
 ## Instrument your Selenium Grid command
-We're going to add support for Open Telemetry API's(one of the many ways to do distributed tracing) using [Coursier](https://get-coursier.io/docs/overview) to generate a full classpath, when started this way the selenium server will inform you that it has found a tracer on stdout.
+The startup scripts use maven to download `opentelemetry-exporter-otlp` and transitive dependencies to `./target/dependency`.
+This folder is added to Selenium Server's classpath. When started this way the selenium server will inform you that it has found a tracer on stdout.
 
 Refer [start-grid-distributed.sh](/start-grid-distributed.sh) if you want to start Grid in distributed mode.
 
@@ -57,9 +60,15 @@ Refer [start-grid-distributed.sh](/start-grid-distributed.sh) if you want to sta
 ![Grid status](/images/grid-ready.png)
 
 ## Execute your tests
-Point your tests as in [DistributedTracingExamples](src/test/java/com/thoughtworks/tracing/DistributedTracingExamples.java) Class and navigate to http://localhost:16686/ to view the outputs.
 
-Under services look up for Selenium-router and notices actions for each calls made by your tests. An example below
+```shell
+./mvnw test
+```
+
+This will execute the [SeleniumGridTest](src/test/java/com/thoughtworks/tracing/SeleniumGridTest.java) Class.
+Navigate to http://localhost:16686/ to view the resulting traces in Jaeger.
+
+Under services look up for `selenium-router` and notice actions for each call made by your tests. An example below
 
 ![Traces](/images/route-traces.png)
 

@@ -5,10 +5,12 @@ jps | grep selenium | awk '{print $1}' | while read line; do
     kill -9 $line
 done
 
-SELENIUM_JAR="selenium-server-4.5.3.jar"
-JAEGAR_JVM_ARGS="-Dotel.traces.exporter=jaeger -Dotel.exporter.jaeger.endpoint=http://localhost:14250 "
-COURSIER="$(coursier fetch -p io.opentelemetry:opentelemetry-exporter-jaeger:1.19.0 io.grpc:grpc-netty:1.50.2)"
+./mvnw dependency:copy-dependencies -DincludeScope=runtime
+
+SELENIUM_JAR="selenium-server.jar"
+TRACER_DEPS="./target/dependency"
+OTEL_JVM_ARGS="-Dotel.traces.exporter=otlp -Dotel.java.global-autoconfigure.enabled=true"
  
-java $JAEGAR_JVM_ARGS \
+java $OTEL_JVM_ARGS \
      -Dotel.resource.attributes=service.name=selenium-standalone \
-     -jar  $SELENIUM_JAR --ext $COURSIER standalone
+     -jar  $SELENIUM_JAR --ext $TRACER_DEPS standalone --selenium-manager true --log-level FINE
